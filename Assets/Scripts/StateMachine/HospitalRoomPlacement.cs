@@ -148,10 +148,6 @@ public class HospitalRoomPlacement :  SKState<HospitalStates>{
 					isValid = false;
 				}
 			}
-
-			if (Input.GetKey (KeyCode.Escape)) {
-				_machine.changeState<HospitalIdle> ();
-			}
 		}
 	}
 	#endregion

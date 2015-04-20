@@ -29,6 +29,7 @@ public class HospitalStates : MonoBehaviour {
 	
 		_machine = new SKStateMachine<HospitalStates> (this, new HospitalIdle());
 		_machine.addState (new HospitalRoomPlacement());
+		_machine.addState (new HospitalRemoveRoom ());
 
 	}
 	
@@ -37,6 +38,10 @@ public class HospitalStates : MonoBehaviour {
 		// update the state machine
 		_machine.update( Time.deltaTime );
 		ray = Camera.main.ScreenPointToRay (Input.mousePosition);
+
+		if (Input.GetKey (KeyCode.Escape)) {
+			_machine.changeState<HospitalIdle> ();
+		}
 	}
 	
 

@@ -12,6 +12,7 @@ public class BuildManager : MonoBehaviour {
 
 	public void RemoveARoom()
 	{
-
+		HospitalStates hs = GetComponent<HospitalStates> ();
+		hs._machine.changeState<HospitalRemoveRoom> ();
 	}
 }
