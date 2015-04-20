@@ -126,11 +126,7 @@ public class HospitalRoomPlacement :  SKState<HospitalStates>{
 
 			if (Input.GetMouseButtonUp (0)) {
 				if (SetFirstPoint && isValid) {
-
-//				GameObject.Instantiate(_context.cube, TopLeft,Quaternion.identity).name = "TL";
-//				GameObject.Instantiate(_context.cube, TopRight,Quaternion.identity).name = "TR";
-//				GameObject.Instantiate(_context.cube, BottomLeft,Quaternion.identity).name = "BL";
-//				GameObject.Instantiate(_context.cube, BottomRight,Quaternion.identity).name = "BR";
+				
 					///buid the walls
 					Room room = new Room (RoomType.General, BottomLeft, TopLeft, BottomRight, TopRight, xD, zD, _context.HorizontalWall, _context.VerticalWall);
 					_context.Rooms.Add (room);
@@ -141,6 +137,9 @@ public class HospitalRoomPlacement :  SKState<HospitalStates>{
 					_context.Hover.localScale = (new Vector3 (1, 1, 1));
 					SetFirstPoint = false;
 					isValid = false;
+
+					_machine.changeState<HospitalIdle>();
+
 				} else {
 					//reset
 
