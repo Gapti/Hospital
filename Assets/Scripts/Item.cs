@@ -124,11 +124,36 @@ public class Item : MonoBehaviour {
 
 	public bool IsValidBenchPos (Vector3 lb)
 	{
-		//TODO SET THE BENCH VALID
-		if (Maps.IsOutSideRoomAlongWall (lb, widthInCells, heightInCells, direction)) 
+		switch (direction)
 		{
-			Debug.Log("bench correct");
-			return true;
+		case ItemDirection.North:
+			if (Maps.GetFloorMapValue (lb) == 0 && Maps.GetFloorMapValue(new Vector3(lb.x, lb.y, lb.z - 1)) == 2 || Maps.GetFloorMapValue (lb) == 0 && Maps.GetFloorMapValue(new Vector3(lb.x, lb.y, lb.z - 1)) == 3) 
+			{
+				Debug.Log("bench correct");
+				return true;
+			}
+			break;
+		case ItemDirection.East:
+			if (Maps.GetFloorMapValue (lb) == 0 && Maps.GetFloorMapValue(new Vector3(lb.x - 1, lb.y, lb.z)) == 2 || Maps.GetFloorMapValue (lb) == 0 && Maps.GetFloorMapValue(new Vector3(lb.x - 1, lb.y, lb.z)) == 3) 
+			{
+				Debug.Log("bench correct");
+				return true;
+			}
+			break;
+		case ItemDirection.South:
+			if (Maps.GetFloorMapValue (lb) == 0 && Maps.GetFloorMapValue(new Vector3(lb.x, lb.y, lb.z + 1)) == 2 || Maps.GetFloorMapValue (lb) == 0 && Maps.GetFloorMapValue(new Vector3(lb.x, lb.y, lb.z + 1)) == 3) 
+			{
+				Debug.Log("bench correct");
+				return true;
+			}
+			break;
+		case ItemDirection.West:
+			if (Maps.GetFloorMapValue (lb) == 0 && Maps.GetFloorMapValue(new Vector3(lb.x + 1, lb.y, lb.z)) == 2 || Maps.GetFloorMapValue (lb) == 0 && Maps.GetFloorMapValue(new Vector3(lb.x + 1, lb.y, lb.z)) == 3) 
+			{
+				Debug.Log("bench correct");
+				return true;
+			}
+			break;
 		}
 
 		Debug.Log("bench Incorrect");

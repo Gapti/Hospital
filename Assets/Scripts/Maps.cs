@@ -54,13 +54,6 @@ public class Maps {
 		return true;
 	}
 
-	public static bool IsOutSideRoomAlongWall(Vector3 pos, int xD, int zD, ItemDirection direction)
-	{
-
-
-		return false;
-	}
-	
 
 	// this is where stuff is on the map floor
 	public static void setFloorMapBlock(Vector3 leftBottom, float xD, float zD, int val)
