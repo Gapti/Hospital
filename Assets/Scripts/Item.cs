@@ -18,12 +18,22 @@ public class Item : MonoBehaviour {
 	private int itemID;
 	public ItemDirection direction;
 	public ItemType type;
+
+	/// get door mats
+	private GameObject mat1;
+	private GameObject mat2;
 	
 
-	void Start()
+	void Awake()
 	{
 		itemID = ++itemIDGenerator;
 		direction = ItemDirection.South;
+
+		if (type == ItemType.Door) 
+		{
+			mat1 = this.transform.FindChild ("Door Mat 1").gameObject;
+			mat2 = this.transform.FindChild ("Door Mat 2").gameObject;
+		}
 
 	}
 	
@@ -91,6 +101,12 @@ public class Item : MonoBehaviour {
 		//not a room
 		if (roomID == 0)
 		{
+			if(type == ItemType.Door)
+			{
+				mat1.GetComponent<Renderer>().material.color = Color.red;
+				mat2.GetComponent<Renderer>().material.color = Color.red;
+			}
+
 			return false;
 		}
 
@@ -110,7 +126,6 @@ public class Item : MonoBehaviour {
 
 	public bool IsValidDoorPos(Vector3 lb, int roomID, Room room)
 	{
-
 		Room checkRoom = room;
 
 		// is both sections inside room ?
@@ -120,11 +135,21 @@ public class Item : MonoBehaviour {
 
 			if(checkRoom.AgainstWall(direction, this.transform.position,widthInCells, heightInCells))
 			{
+				mat1.GetComponent<Renderer>().material.color = Color.green;
+				mat2.GetComponent<Renderer>().material.color = Color.green;
+
 				return true;
 			}
 
+			mat1.GetComponent<Renderer>().material.color = Color.red;
+			mat2.GetComponent<Renderer>().material.color = Color.red;
+
+
 			return false;
 		}
+
+		mat1.GetComponent<Renderer>().material.color = Color.red;
+		mat2.GetComponent<Renderer>().material.color = Color.red;
 
 		return false;
 	}
@@ -134,7 +159,7 @@ public class Item : MonoBehaviour {
 
 		Maps.setFloorMapBlock (lb, widthInCells, heightInCells, 3);
 		AssignedRoom = room;
-
+		AssignedRoom.AddDoorToList (this.gameObject);
 		//turn off the walls
 
 		room.DisableWallsForDoors (direction, this.transform.position, widthInCells, heightInCells);

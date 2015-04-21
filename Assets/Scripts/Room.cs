@@ -30,6 +30,8 @@ public class Room {
 	public List<GameObject> topWalls = new List<GameObject>();
 	public List<GameObject> bottomWalls = new List<GameObject>();
 
+	public List<GameObject> Doors = new List<GameObject> ();
+
 	public const int MinXDist = 2;
 	public const int MinZDist = 2;
 
@@ -118,6 +120,7 @@ public class Room {
 	{
 		foreach (GameObject go in leftWalls)
 		{
+
 			GameObject.Destroy(go);
 		}
 
@@ -135,6 +138,21 @@ public class Room {
 		{
 			GameObject.Destroy(go);
 		}
+
+		leftWalls.Clear ();
+		rightWalls.Clear ();
+		topWalls.Clear ();
+		bottomWalls.Clear ();
+	}
+
+	public void RemoveAllDoors()
+	{
+		foreach (GameObject g in Doors) 
+		{
+			GameObject.Destroy(g);
+		}
+
+		Doors.Clear ();
 	}
 
 	public bool AgainstWall(ItemDirection direction, Vector3 bl, int xD, int zD)
@@ -165,6 +183,11 @@ public class Room {
 		return false;
 	}
 
+	public void AddDoorToList(GameObject door)
+	{
+		Doors.Add (door);
+	}
+
 	public void DisableWallsForDoors(ItemDirection direction,Vector3 bl, int xD, int zD )
 	{
 		Vector3 otherDoorPos;
@@ -175,7 +198,6 @@ public class Room {
 		switch(direction)
 		{
 		case ItemDirection.West:
-
 
 			otherDoorPos = new Vector3(bl.x, bl.y, bl.z);
 			firstDoorPos = new Vector3(bl.x, bl.y, bl.z - xD);

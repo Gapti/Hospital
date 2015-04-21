@@ -49,6 +49,9 @@ public class HospitalRemoveRoom : SKState<HospitalStates>{
 				//remove the walls
 				selectedRoom.RemoveAllWalls();
 
+				//remove the doors
+				selectedRoom.RemoveAllDoors();
+
 				//reset the maps
 				Maps.setRoomMapBlock(selectedRoom.BottomLeft, selectedRoom.xLength, selectedRoom.zLength, 0);
 				Maps.setFloorMapBlock(selectedRoom.BottomLeft, selectedRoom.xLength, selectedRoom.zLength,0);
