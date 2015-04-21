@@ -18,8 +18,6 @@ public class HospitalRemoveRoom : SKState<HospitalStates>{
 			///move curser and detect the room id from hit.point
 
 			selectedRoomID = Maps.GetRoomID((int)_context.hit.point.x, (int)_context.hit.point.z);
-			Debug.Log(selectedRoomID);
-
 
 			if( selectedRoomID > 0)
 			{
@@ -32,6 +30,7 @@ public class HospitalRemoveRoom : SKState<HospitalStates>{
 				_context.Hover.localScale = new Vector3 (selectedRoom.xLength, 1, selectedRoom.zLength);
 
 				_context.Hover.gameObject.SetActive (true);
+				_context.Hover.SetAsLastSibling();
 
 
 			}
@@ -51,6 +50,8 @@ public class HospitalRemoveRoom : SKState<HospitalStates>{
 
 				//remove the doors
 				selectedRoom.RemoveAllDoors();
+
+				selectedRoom.RemoveFloor();
 
 				//reset the maps
 				Maps.setRoomMapBlock(selectedRoom.BottomLeft, selectedRoom.xLength, selectedRoom.zLength, 0);

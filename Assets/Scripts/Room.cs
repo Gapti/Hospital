@@ -31,6 +31,7 @@ public class Room {
 	public List<GameObject> bottomWalls = new List<GameObject>();
 
 	public List<GameObject> Doors = new List<GameObject> ();
+	public GameObject roomFloor;
 
 	public const int MinXDist = 2;
 	public const int MinZDist = 2;
@@ -45,14 +46,13 @@ public class Room {
 		BottomRight = new Vector3 ();
 		TopLeft = new Vector3 ();
 		TopRight = new Vector3 ();
-		//Middle = new Vector3 ();
 		xLength = 0;
 		zLength = 0;
 
 	}
 
 	//overloaded constructor room
-	public Room(RoomType roomType, Vector3 leftDown, Vector3 leftUp, Vector3 rightDown, Vector3 rightUp, float xDist, float zDist, GameObject horizonalWall, GameObject verticalWall)
+	public Room(RoomType roomType, Vector3 leftDown, Vector3 leftUp, Vector3 rightDown, Vector3 rightUp, float xDist, float zDist, GameObject horizonalWall, GameObject verticalWall, GameObject floor)
 	{
 		RoomID = ++RoomIdCounter;
 		type = roomType;
@@ -63,7 +63,11 @@ public class Room {
 		xLength = xDist;
 		zLength = zDist;
 
-		Debug.Log (xLength + " " + zLength);
+		///make the floor
+		roomFloor =(GameObject) GameObject.Instantiate(floor, new Vector3(leftDown.x + xDist / 2, 0.01f,leftDown.z + zDist /2), Quaternion.identity);
+		roomFloor.transform.localScale = (new Vector3 (xDist, 0, zDist));
+		Renderer roomFloorMat = roomFloor.transform.FindChild ("RoomFloor").GetComponent<Renderer>();
+		roomFloorMat.material.mainTextureScale = new Vector2 (xDist, zDist);
 
 		//build the walls
 
@@ -114,6 +118,11 @@ public class Room {
 //		GameObject.Instantiate (cube, BottomLeft, Quaternion.identity).name = "BOTTOMLEFT";
 //		GameObject.Instantiate (cube, BottomRight, Quaternion.identity).name = "BOTTOMRIGHT";
 
+	}
+
+	public void RemoveFloor()
+	{
+		GameObject.Destroy (roomFloor);
 	}
 
 	public void RemoveAllWalls()

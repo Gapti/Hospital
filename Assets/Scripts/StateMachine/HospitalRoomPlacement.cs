@@ -128,7 +128,7 @@ public class HospitalRoomPlacement :  SKState<HospitalStates>{
 				if (SetFirstPoint && isValid) {
 				
 					///buid the walls
-					Room room = new Room (RoomType.General, BottomLeft, TopLeft, BottomRight, TopRight, xD, zD, _context.HorizontalWall, _context.VerticalWall);
+					Room room = new Room (RoomType.General, BottomLeft, TopLeft, BottomRight, TopRight, xD, zD, _context.HorizontalWall, _context.VerticalWall, _context.RoomFloor);
 					_context.Rooms.Add (room);
 
 					Maps.setRoomMapBlock (BottomLeft, xD, zD, room.RoomID);

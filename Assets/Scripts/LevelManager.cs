@@ -98,6 +98,9 @@ public class LevelManager : MonoBehaviour {
 			///remove all walls
 			SelectedRoom.RemoveAllWalls ();
 
+			//remove the floor
+			SelectedRoom.RemoveFloor();
+
 			///reset the maps
 			Maps.setFloorMapBlock (SelectedRoom.BottomLeft, SelectedRoom.xLength, SelectedRoom.zLength, 0);
 			Maps.setRoomMapBlock (SelectedRoom.BottomLeft, SelectedRoom.xLength, SelectedRoom.zLength, 0);

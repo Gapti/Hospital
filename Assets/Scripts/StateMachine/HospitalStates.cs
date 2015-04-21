@@ -18,6 +18,7 @@ public class HospitalStates : MonoBehaviour {
 	public Renderer HoverRender;
 	public GameObject Door;
 	public GameObject Bench;
+	public GameObject RoomFloor;
 
 	public GameObject ChosenItem;
 
@@ -34,6 +35,8 @@ public class HospitalStates : MonoBehaviour {
 		_machine.addState (new HospitalRoomPlacement());
 		_machine.addState (new HospitalRemoveRoom ());
 		_machine.addState (new HostpitalFurnishSelectPos ());
+
+		Hover.SetAsLastSibling ();
 
 	}
 	
@@ -57,7 +60,7 @@ public class HospitalStates : MonoBehaviour {
 		// Convert the space points to tile points
 		tilePoints.x = (int)(floorPoints.x / tileWidth);
 		tilePoints.z = (int)(floorPoints.z / tileHeight);
-		tilePoints.y = 0;
+		tilePoints.y = 0.001f;
 		
 		// Return the tile points
 		return tilePoints;
