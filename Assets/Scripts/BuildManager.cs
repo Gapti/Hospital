@@ -16,9 +16,17 @@ public class BuildManager : MonoBehaviour {
 		hs._machine.changeState<HospitalRemoveRoom> ();
 	}
 
-	public void FurnishRoomSelect()
+	public void FurnishRoomDoors()
 	{
 		HospitalStates hs = GetComponent<HospitalStates>();
+		hs.ChosenItem = hs.Door;
+		hs._machine.changeState<HostpitalFurnishSelectPos>();
+	}
+
+	public void BuildABench()
+	{
+		HospitalStates hs = GetComponent<HospitalStates>();
+		hs.ChosenItem = hs.Bench;
 		hs._machine.changeState<HostpitalFurnishSelectPos>();
 	}
 }

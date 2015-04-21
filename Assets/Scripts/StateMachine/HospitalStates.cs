@@ -17,6 +17,9 @@ public class HospitalStates : MonoBehaviour {
 	public GameObject VerticalWall;
 	public Renderer HoverRender;
 	public GameObject Door;
+	public GameObject Bench;
+
+	public GameObject ChosenItem;
 
 
 	public List<Room> Rooms = new List<Room> ();

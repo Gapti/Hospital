@@ -2,7 +2,7 @@
 using System.Collections;
 
 public enum ItemDirection { North, South, East, West }
-public enum ItemType { Door }
+public enum ItemType { Door, Bench }
 
 public class Item : MonoBehaviour {
 
@@ -98,19 +98,8 @@ public class Item : MonoBehaviour {
 
 	public bool IsValidPosition(Vector3 lb, int roomID, Room room)
 	{
-		//not a room
-		if (roomID == 0)
-		{
-			if(type == ItemType.Door)
-			{
-				mat1.GetComponent<Renderer>().material.color = Color.red;
-				mat2.GetComponent<Renderer>().material.color = Color.red;
-			}
-
-			return false;
-		}
-
 		///switch on itemType
+		/// might want to move the along walls to make them all follow same route
 		switch (type) 
 		{
 			case ItemType.Door:
@@ -119,7 +108,30 @@ public class Item : MonoBehaviour {
 				return true;
 			}
 			break;
+
+		case ItemType.Bench:
+			if(IsValidBenchPos(lb))
+			{
+				return true;
+			}
+
+			break;
 		}
+
+		return false;
+
+	}
+
+	public bool IsValidBenchPos (Vector3 lb)
+	{
+		//TODO SET THE BENCH VALID
+		if (Maps.IsOutSideRoomAlongWall (lb, widthInCells, heightInCells, direction)) 
+		{
+			Debug.Log("bench correct");
+			return true;
+		}
+
+		Debug.Log("bench Incorrect");
 
 		return false;
 	}
@@ -159,9 +171,17 @@ public class Item : MonoBehaviour {
 
 		Maps.setFloorMapBlock (lb, widthInCells, heightInCells, 3);
 		AssignedRoom = room;
-		AssignedRoom.AddDoorToList (this.gameObject);
-		//turn off the walls
 
-		room.DisableWallsForDoors (direction, this.transform.position, widthInCells, heightInCells);
+		if (type == ItemType.Door) 
+		{
+			AssignedRoom.AddDoorToList (this.gameObject);
+			//turn off the walls
+
+			room.DisableWallsForDoors (direction, this.transform.position, widthInCells, heightInCells);
+
+			//turn off mats
+			mat1.SetActive(false);
+			mat2.SetActive(false);
+		}
 	}
 }

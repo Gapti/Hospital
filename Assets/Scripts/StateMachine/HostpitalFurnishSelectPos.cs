@@ -14,7 +14,7 @@ public class HostpitalFurnishSelectPos : SKState<HospitalStates> {
 
 	public override void begin ()
 	{
-		item = GameObject.Instantiate (_context.Door).GetComponent<Item>();
+		item = GameObject.Instantiate (_context.ChosenItem).GetComponent<Item>();
 		_context.Hover.gameObject.SetActive (false);
 		roomID = 0;
 	}
