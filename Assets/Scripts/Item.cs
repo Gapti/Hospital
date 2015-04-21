@@ -12,6 +12,7 @@ public class Item : MonoBehaviour {
 	public Room AssignedRoom;
 	public int widthInCells;
 	public int heightInCells;
+	public bool AgainstWall;
 
 
 	private int itemID;
@@ -28,7 +29,7 @@ public class Item : MonoBehaviour {
 	
 	public void Rotate()
 	{
-		DoorSwitch ();
+		ItemSwitch ();
 
 		switch (direction) 
 		{
@@ -51,7 +52,7 @@ public class Item : MonoBehaviour {
 		}
 	}
 
-	public void DoorSwitch()
+	public void ItemSwitch()
 	{
 		int temp;
 
@@ -85,21 +86,57 @@ public class Item : MonoBehaviour {
 		}
 	}
 
-	public bool IsValidPosition(Vector3 lb, int roomID)
+	public bool IsValidPosition(Vector3 lb, int roomID, Room room)
 	{
 		//not a room
 		if (roomID == 0)
 		{
-			Debug.Log ("no room");
 			return false;
 		}
 
-		if (Maps.OnFloorMap (lb, widthInCells, heightInCells, roomID)) 
+		///switch on itemType
+		switch (type) 
 		{
-			return true;
+			case ItemType.Door:
+			if(IsValidDoorPos(lb, roomID, room))
+			{
+				return true;
+			}
+			break;
 		}
 
 		return false;
+	}
 
+	public bool IsValidDoorPos(Vector3 lb, int roomID, Room room)
+	{
+
+		Room checkRoom = room;
+
+		// is both sections inside room ?
+		if (Maps.OnFloorMap (lb, widthInCells, heightInCells, roomID)) 
+		{
+			///check if on wall pos
+
+			if(checkRoom.AgainstWall(direction, this.transform.position,widthInCells, heightInCells))
+			{
+				return true;
+			}
+
+			return false;
+		}
+
+		return false;
+	}
+
+	public void BuildItem(Vector3 lb, Room room)
+	{
+
+		Maps.setFloorMapBlock (lb, widthInCells, heightInCells, 3);
+		AssignedRoom = room;
+
+		//turn off the walls
+
+		room.DisableWallsForDoors (direction, this.transform.position, widthInCells, heightInCells);
 	}
 }

@@ -40,13 +40,18 @@ public class HostpitalFurnishSelectPos : SKState<HospitalStates> {
 				item.Rotate();
 			}
 
-			if(item.IsValidPosition(_context.Hover.position, roomID))
+			if(item.IsValidPosition(_context.Hover.position, roomID, _context.GetRoomFromID(roomID)))
 			{
-				Debug.Log("valid");
+				if(Input.GetMouseButton(0))
+				{
+					item.BuildItem(_context.Hover.position, _context.GetRoomFromID(roomID));
+
+					_machine.changeState<HospitalIdle>();
+				}
 			}
 			else
 			{
-				Debug.Log ("invalid");
+
 			}
 
 		}

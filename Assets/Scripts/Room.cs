@@ -137,5 +137,95 @@ public class Room {
 		}
 	}
 
+	public bool AgainstWall(ItemDirection direction, Vector3 bl, int xD, int zD)
+	{
+		switch (direction) 
+		{
+		case ItemDirection.North:
+			if(bl.z == TopLeft.z)
+				return true;
+			break;
+		case ItemDirection.East:
+			if(bl.x == TopRight.x)
+				return true;
+			break;
+		case ItemDirection.South:
+			if(bl.z == BottomLeft.z)
+				return true;
+			break;
+		case ItemDirection.West:
+			if(bl.x == TopLeft.x)
+				return true;
+			break;
+
+		}
+
+		//Debug.Log ("door not valid " + direction);
+
+		return false;
+	}
+
+	public void DisableWallsForDoors(ItemDirection direction,Vector3 bl, int xD, int zD )
+	{
+		Vector3 otherDoorPos;
+		Vector3 firstDoorPos;
+
+		Debug.Log (xD + "  " + zD);
+
+		switch(direction)
+		{
+		case ItemDirection.West:
+
+
+			otherDoorPos = new Vector3(bl.x, bl.y, bl.z);
+			firstDoorPos = new Vector3(bl.x, bl.y, bl.z - xD);
+
+		foreach (GameObject t in leftWalls)
+		{
+				if(t.transform.position == firstDoorPos || t.transform.position == otherDoorPos )
+				t.gameObject.SetActive(false);
+
+		}
+			break;
+		case ItemDirection.East:
+
+			otherDoorPos = new Vector3(bl.x, bl.y, bl.z + xD);
+			firstDoorPos = new Vector3(bl.x, bl.y, bl.z + zD);
+
+
+		foreach (GameObject t in rightWalls)
+		{
+				if(t.transform.position == firstDoorPos || t.transform.position == otherDoorPos)
+				t.gameObject.SetActive(false);
+		}
+
+			break;
+
+		case ItemDirection.South:
+		//working
+			otherDoorPos = new Vector3(bl.x + zD, bl.y, bl.z);
+
+		foreach (GameObject t in bottomWalls)
+		{
+			if(t.transform.position == bl || t.transform.position == otherDoorPos)
+				t.gameObject.SetActive(false);
+		}
+
+			break;
+
+		case ItemDirection.North:
+
+		otherDoorPos = new Vector3(bl.x - zD, bl.y, bl.z);
+		firstDoorPos = new Vector3(bl.x - xD, bl.y, bl.z);
+
+		foreach (GameObject t in topWalls)
+				if (t.transform.position == firstDoorPos || t.transform.position == otherDoorPos)
+				t.gameObject.SetActive (false);
+
+			break;
+
+		}
+	}
+
 
 }
