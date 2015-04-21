@@ -37,6 +37,22 @@ public class Maps {
 	{
 		return roomMap [xPoint, zPoint];
 	}
+
+	public static bool OnFloorMap(Vector3 leftBottom, int xD, int zD, int val)
+	{
+		for (int a = 0; a < xD; a++) 
+		{
+			for( int b = 0; b < zD; b++)
+			{
+				if(floorMap[(int)leftBottom.x + a, (int)leftBottom.z + b] != 2)
+				{
+					return false;
+				}
+			}
+		}
+
+		return true;
+	}
 	
 
 	// this is where stuff is on the map floor

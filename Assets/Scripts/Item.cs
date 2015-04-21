@@ -2,6 +2,7 @@
 using System.Collections;
 
 public enum ItemDirection { North, South, East, West }
+public enum ItemType { Door }
 
 public class Item : MonoBehaviour {
 
@@ -15,6 +16,7 @@ public class Item : MonoBehaviour {
 
 	private int itemID;
 	public ItemDirection direction;
+	public ItemType type;
 	
 
 	void Start()
@@ -83,4 +85,21 @@ public class Item : MonoBehaviour {
 		}
 	}
 
+	public bool IsValidPosition(Vector3 lb, int roomID)
+	{
+		//not a room
+		if (roomID == 0)
+		{
+			Debug.Log ("no room");
+			return false;
+		}
+
+		if (Maps.OnFloorMap (lb, widthInCells, heightInCells, roomID)) 
+		{
+			return true;
+		}
+
+		return false;
+
+	}
 }

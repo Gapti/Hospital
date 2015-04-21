@@ -32,9 +32,21 @@ public class HostpitalFurnishSelectPos : SKState<HospitalStates> {
 			_context.Hover.position = _context.getTilePoints(_context.hit.point);
 			item.itemPositionAdjustment(_context.Hover.position);
 
+			///collect roomid
+			roomID = Maps.GetRoomID((int)_context.Hover.position.x,(int) _context.Hover.position.z);
+
 			if(Input.GetKeyDown(KeyCode.Tab))
 			{
 				item.Rotate();
+			}
+
+			if(item.IsValidPosition(_context.Hover.position, roomID))
+			{
+				Debug.Log("valid");
+			}
+			else
+			{
+				Debug.Log ("invalid");
 			}
 
 		}
