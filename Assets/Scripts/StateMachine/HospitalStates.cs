@@ -16,11 +16,11 @@ public class HospitalStates : MonoBehaviour {
 	public GameObject HorizontalWall;
 	public GameObject VerticalWall;
 	public Renderer HoverRender;
+	public GameObject Door;
+
 
 	public List<Room> Rooms = new List<Room> ();
-
-
-
+	
 	public SKStateMachine<HospitalStates> _machine;
 
 
@@ -30,6 +30,7 @@ public class HospitalStates : MonoBehaviour {
 		_machine = new SKStateMachine<HospitalStates> (this, new HospitalIdle());
 		_machine.addState (new HospitalRoomPlacement());
 		_machine.addState (new HospitalRemoveRoom ());
+		_machine.addState (new HostpitalFurnishSelectPos ());
 
 	}
 	
@@ -57,5 +58,18 @@ public class HospitalStates : MonoBehaviour {
 		
 		// Return the tile points
 		return tilePoints;
+	}
+
+	public Room GetRoomFromID(int roomID)
+	{
+		foreach(Room r in Rooms)
+		{
+			if(r.RoomID == roomID)
+			{
+				return (r);
+			}
+		}
+
+		return null;
 	}
 }

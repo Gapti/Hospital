@@ -15,4 +15,10 @@ public class BuildManager : MonoBehaviour {
 		HospitalStates hs = GetComponent<HospitalStates> ();
 		hs._machine.changeState<HospitalRemoveRoom> ();
 	}
+
+	public void FurnishRoomSelect()
+	{
+		HospitalStates hs = GetComponent<HospitalStates>();
+		hs._machine.changeState<HostpitalFurnishSelectPos>();
+	}
 }

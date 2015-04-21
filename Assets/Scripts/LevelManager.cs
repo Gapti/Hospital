@@ -271,11 +271,7 @@ public class LevelManager : MonoBehaviour {
 			if(Maps.GetRoomID((int)Door.transform.position.x, (int)Door.transform.position.z) == lastRoomID)
 			{
 
-				if(rooms[lastRoomID - 1].ValidForDoor((int)Door.transform.position.x, (int)Door.transform.position.z))
-				{
-					print ("done");
-				}
-
+			
 			}
 		}
 	

@@ -1,0 +1,186 @@
+fileFormatVersion: 2
+guid: e9743903e00c04fb3ac7ca10c5bad857
+timeCreated: 1429536946
+licenseType: Pro
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: _____ __10
+    100002: _____ __11
+    100004: _____ __12
+    100006: _____ __13
+    100008: _____ __14
+    100010: _____ __15
+    100012: _____ __16
+    100014: _____ ___0
+    100016: _____ ___1
+    100018: _____ ___2
+    100020: _____ ___3
+    100022: _____ ___4
+    100024: _____ ___5
+    100026: _____ ___6
+    100028: _____ ___7
+    100030: _____ ___8
+    100032: _____ ___9
+    100034: _____ ____
+    100036: //RootNode
+    100038: Door Sofia
+    100040: Handle - 0
+    100042: Handle bo0
+    100044: Handle bod
+    100046: Handle ca0
+    100048: Handle ca1
+    100050: Handle ca2
+    100052: Handle cap
+    100054: Handle pa0
+    100056: Handle par
+    400000: _____ __10
+    400002: _____ __11
+    400004: _____ __12
+    400006: _____ __13
+    400008: _____ __14
+    400010: _____ __15
+    400012: _____ __16
+    400014: _____ ___0
+    400016: _____ ___1
+    400018: _____ ___2
+    400020: _____ ___3
+    400022: _____ ___4
+    400024: _____ ___5
+    400026: _____ ___6
+    400028: _____ ___7
+    400030: _____ ___8
+    400032: _____ ___9
+    400034: _____ ____
+    400036: //RootNode
+    400038: Door Sofia
+    400040: Handle - 0
+    400042: Handle bo0
+    400044: Handle bod
+    400046: Handle ca0
+    400048: Handle ca1
+    400050: Handle ca2
+    400052: Handle cap
+    400054: Handle pa0
+    400056: Handle par
+    2300000: _____ __10
+    2300002: _____ __11
+    2300004: _____ __12
+    2300006: _____ __13
+    2300008: _____ __14
+    2300010: _____ __15
+    2300012: _____ __16
+    2300014: _____ ___1
+    2300016: _____ ___2
+    2300018: _____ ___3
+    2300020: _____ ___4
+    2300022: _____ ___5
+    2300024: _____ ___6
+    2300026: _____ ___7
+    2300028: _____ ___8
+    2300030: Handle bo0
+    2300032: Handle bod
+    2300034: Handle ca0
+    2300036: Handle ca1
+    2300038: Handle ca2
+    2300040: Handle cap
+    3300000: _____ __10
+    3300002: _____ __11
+    3300004: _____ __12
+    3300006: _____ __13
+    3300008: _____ __14
+    3300010: _____ __15
+    3300012: _____ __16
+    3300014: _____ ___1
+    3300016: _____ ___2
+    3300018: _____ ___3
+    3300020: _____ ___4
+    3300022: _____ ___5
+    3300024: _____ ___6
+    3300026: _____ ___7
+    3300028: _____ ___8
+    3300030: Handle bo0
+    3300032: Handle bod
+    3300034: Handle ca0
+    3300036: Handle ca1
+    3300038: Handle ca2
+    3300040: Handle cap
+    4300000: _____ ___1
+    4300002: _____ ___2
+    4300004: _____ ___3
+    4300006: _____ ___4
+    4300008: _____ ___5
+    4300010: _____ ___6
+    4300012: _____ ___7
+    4300014: _____ ___8
+    4300016: _____ __10
+    4300018: _____ __11
+    4300020: _____ __12
+    4300022: _____ __13
+    4300024: _____ __14
+    4300026: _____ __15
+    4300028: _____ __16
+    4300030: Handle cap
+    4300032: Handle ca0
+    4300034: Handle bod
+    4300036: Handle ca1
+    4300038: Handle ca2
+    4300040: Handle bo0
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

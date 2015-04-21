@@ -25,14 +25,7 @@ public class HospitalRemoveRoom : SKState<HospitalStates>{
 			{
 				////show selected room
 
-				foreach(Room r in _context.Rooms)
-				{
-					if(r.RoomID == selectedRoomID)
-					{
-						selectedRoom = r;
-						break;
-					}
-				}
+				selectedRoom = _context.GetRoomFromID(selectedRoomID);
 
 				_context.Hover.position = _context.getTilePoints( new Vector3(selectedRoom.BottomLeft.x, 0, selectedRoom.BottomRight.z));
 

@@ -137,23 +137,5 @@ public class Room {
 		}
 	}
 
-	public bool ValidForDoor(int xPos, int zPos)
-	{
-		//check top wall
-
-		Debug.Log (RoomID);
-		foreach (GameObject go in topWalls) 
-		{
-
-			Debug.Log("compare xPos: " + xPos + " " + go.transform.position.x + " zPos: " + zPos + 0.5f + " " + go.transform.position.z);
-
-			if(xPos == go.transform.position.x && zPos == go.transform.position.z + 0.5f)
-			{
-				Debug.Log("found it on top row");
-				return true;
-			}
-		}
-		return false;
-	}
 
 }
