@@ -12,7 +12,12 @@ public class Item : MonoBehaviour {
 	public Room AssignedRoom;
 	public int widthInCells;
 	public int heightInCells;
-	public bool AgainstWall;
+
+	public bool AgainstWallCorridoor;
+	public bool AgainstWallAnywhere;
+	public bool AgainstWallRoom;
+
+	public bool CorridoorOnly; 
 
 
 	private int itemID;
@@ -62,6 +67,7 @@ public class Item : MonoBehaviour {
 		}
 	}
 
+
 	public void ItemSwitch()
 	{
 		int temp;
@@ -100,63 +106,66 @@ public class Item : MonoBehaviour {
 	{
 		///switch on itemType
 		/// might want to move the along walls to make them all follow same route
-		switch (type) 
+		switch (type)
 		{
-			case ItemType.Door:
-			if(IsValidDoorPos(lb, roomID, room))
-			{
+		case ItemType.Door:
+			if (IsValidDoorPos (lb, roomID, room)) {
 				return true;
 			}
 			break;
+	
+		}
 
-		case ItemType.Bench:
-			if(IsValidBenchPos(lb))
+		if(AgainstWallCorridoor)
+		{
+			if(IsAgainstWallInCorridoor(lb))
 			{
 				return true;
 			}
+		}
 
-			break;
+		if(CorridoorOnly)
+		{
+			if(Maps.GetFloorMapValue(lb) == 0)
+			{
+				return true;
+			}
 		}
 
 		return false;
 
 	}
 
-	public bool IsValidBenchPos (Vector3 lb)
+	public bool IsAgainstWallInCorridoor (Vector3 lb)
 	{
 		switch (direction)
 		{
 		case ItemDirection.North:
 			if (Maps.GetFloorMapValue (lb) == 0 && Maps.GetFloorMapValue(new Vector3(lb.x, lb.y, lb.z - 1)) == 2 || Maps.GetFloorMapValue (lb) == 0 && Maps.GetFloorMapValue(new Vector3(lb.x, lb.y, lb.z - 1)) == 3) 
 			{
-				Debug.Log("bench correct");
 				return true;
 			}
 			break;
 		case ItemDirection.East:
 			if (Maps.GetFloorMapValue (lb) == 0 && Maps.GetFloorMapValue(new Vector3(lb.x - 1, lb.y, lb.z)) == 2 || Maps.GetFloorMapValue (lb) == 0 && Maps.GetFloorMapValue(new Vector3(lb.x - 1, lb.y, lb.z)) == 3) 
 			{
-				Debug.Log("bench correct");
 				return true;
 			}
 			break;
 		case ItemDirection.South:
 			if (Maps.GetFloorMapValue (lb) == 0 && Maps.GetFloorMapValue(new Vector3(lb.x, lb.y, lb.z + 1)) == 2 || Maps.GetFloorMapValue (lb) == 0 && Maps.GetFloorMapValue(new Vector3(lb.x, lb.y, lb.z + 1)) == 3) 
 			{
-				Debug.Log("bench correct");
 				return true;
 			}
 			break;
 		case ItemDirection.West:
 			if (Maps.GetFloorMapValue (lb) == 0 && Maps.GetFloorMapValue(new Vector3(lb.x + 1, lb.y, lb.z)) == 2 || Maps.GetFloorMapValue (lb) == 0 && Maps.GetFloorMapValue(new Vector3(lb.x + 1, lb.y, lb.z)) == 3) 
 			{
-				Debug.Log("bench correct");
 				return true;
 			}
 			break;
 		}
 
-		Debug.Log("bench Incorrect");
 
 		return false;
 	}
@@ -191,22 +200,35 @@ public class Item : MonoBehaviour {
 		return false;
 	}
 
+	public void BuildItemCorridoor(Vector3 lb)
+	{
+		Maps.setFloorMapBlock (lb, widthInCells, heightInCells, 1);
+	}
+
 	public void BuildItem(Vector3 lb, Room room)
 	{
+
+		if(CorridoorOnly)
+		{
+			BuildItemCorridoor(lb);
+		}
+		else
+		{
 
 		Maps.setFloorMapBlock (lb, widthInCells, heightInCells, 3);
 		AssignedRoom = room;
 
-		if (type == ItemType.Door) 
-		{
-			AssignedRoom.AddDoorToList (this.gameObject);
-			//turn off the walls
+			if (type == ItemType.Door) 
+			{
+				AssignedRoom.AddDoorToList (this.gameObject);
+				//turn off the walls
 
-			room.DisableWallsForDoors (direction, this.transform.position, widthInCells, heightInCells);
+				room.DisableWallsForDoors (direction, this.transform.position, widthInCells, heightInCells);
 
-			//turn off mats
-			mat1.SetActive(false);
-			mat2.SetActive(false);
+				//turn off mats
+				mat1.SetActive(false);
+				mat2.SetActive(false);
+			}
 		}
 	}
 }

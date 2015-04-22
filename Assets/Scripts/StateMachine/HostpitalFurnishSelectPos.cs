@@ -15,8 +15,13 @@ public class HostpitalFurnishSelectPos : SKState<HospitalStates> {
 	public override void begin ()
 	{
 		item = GameObject.Instantiate (_context.ChosenItem).GetComponent<Item>();
-		_context.Hover.gameObject.SetActive (false);
+		_context.Hover.gameObject.SetActive (true);
 		roomID = 0;
+	}
+
+	public override void end ()
+	{
+		_context.Hover.gameObject.SetActive (false);
 	}
 
 
@@ -42,6 +47,8 @@ public class HostpitalFurnishSelectPos : SKState<HospitalStates> {
 
 			if(item.IsValidPosition(_context.Hover.position, roomID, _context.GetRoomFromID(roomID)))
 			{
+				_context.HoverRender.material.color = Color.green;
+
 				if(Input.GetMouseButton(0))
 				{
 					item.BuildItem(_context.Hover.position, _context.GetRoomFromID(roomID));
@@ -51,7 +58,7 @@ public class HostpitalFurnishSelectPos : SKState<HospitalStates> {
 			}
 			else
 			{
-
+				_context.HoverRender.material.color = Color.red;
 			}
 
 		}
