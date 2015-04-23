@@ -4,9 +4,10 @@ using System.Collections;
 public class BuildManager : MonoBehaviour {
 
 
-	public void BuildRoomGeneral()
+	public void BuildGPOffice()
 	{
 		HospitalStates hs = GetComponent<HospitalStates> ();
+		hs.roomSelectedFromUI = RoomType.GPOffice;
 		hs._machine.changeState<HospitalRoomPlacement> ();
 	}
 

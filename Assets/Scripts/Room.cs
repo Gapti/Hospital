@@ -3,10 +3,16 @@ using System.Collections;
 using System.Collections.Generic;
 
 
-public enum RoomType 
-{ 
+public enum RoomType
+{
 	None,
-	General
+	GPOffice,
+	GeneralDiag,
+	Cardiogram,
+	Scanner,
+	Ultrascan,
+	BloodMachine,
+	Xray
 }
 
 public class Room {

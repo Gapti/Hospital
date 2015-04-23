@@ -22,6 +22,10 @@ public class HospitalStates : MonoBehaviour {
 
 	public GameObject ChosenItem;
 
+	/// <summary>
+	/// from the buttons
+	/// </summary>
+	public RoomType roomSelectedFromUI;
 
 	public List<Room> Rooms = new List<Room> ();
 	
@@ -37,6 +41,7 @@ public class HospitalStates : MonoBehaviour {
 		_machine.addState (new HostpitalFurnishSelectPos ());
 
 		Hover.SetAsLastSibling ();
+		roomSelectedFromUI = RoomType.None;
 
 	}
 	
