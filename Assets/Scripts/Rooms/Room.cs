@@ -57,8 +57,13 @@ public class Room {
 
 	}
 
+	public void MakeBluePrint(RoomType roomType, Vector3 leftDown, Vector3 leftUp, Vector3 rightDown, Vector3 rightUp, float xDist, float zDist)
+	{
+
+	}
+
 	//overloaded constructor room
-	public Room(RoomType roomType, Vector3 leftDown, Vector3 leftUp, Vector3 rightDown, Vector3 rightUp, float xDist, float zDist, GameObject horizonalWall, GameObject verticalWall, GameObject floor)
+	public void BuildRoom(RoomType roomType, Vector3 leftDown, Vector3 leftUp, Vector3 rightDown, Vector3 rightUp, float xDist, float zDist, GameObject horizonalWall, GameObject verticalWall, GameObject floor)
 	{
 		RoomID = ++RoomIdCounter;
 		type = roomType;
@@ -125,6 +130,7 @@ public class Room {
 //		GameObject.Instantiate (cube, BottomRight, Quaternion.identity).name = "BOTTOMRIGHT";
 
 	}
+	
 
 	public void RemoveFloor()
 	{

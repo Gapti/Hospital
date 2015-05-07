@@ -1,6 +1,8 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using Prime31.StateKit;
+using UnityEngine.Events;
+using UnityEngine.EventSystems;
 
 public class HospitalRoomPlacement :  SKState<HospitalStates>{
 
@@ -21,6 +23,9 @@ public class HospitalRoomPlacement :  SKState<HospitalStates>{
 	public override void begin ()
 	{
 		_context.Hover.gameObject.SetActive (true);
+
+		_context.confirmedManager = ConfirmManager.Instance;
+
 	}
 
 	public override void end ()
@@ -28,12 +33,45 @@ public class HospitalRoomPlacement :  SKState<HospitalStates>{
 		SetFirstPoint = false;
 	}
 
+	void OKFunction ()
+	{
+			
+			Room room = new Room();
+			
+			///buid the walls
+			room.BuildRoom(_context.roomSelectedFromUI, BottomLeft, TopLeft, BottomRight, TopRight, xD, zD, _context.HorizontalWall, _context.VerticalWall, _context.RoomFloor);
+			_context.Rooms.Add (room);
+			
+			Maps.setRoomMapBlock (BottomLeft, xD, zD, room.RoomID);
+			Maps.setFloorMapBlock (BottomLeft, xD, zD, 2);
+			
+			_context.Hover.localScale = (new Vector3 (1, 1, 1));
+			SetFirstPoint = false;
+			isValid = false;
+			
+			_machine.changeState<HospitalIdle>();
+			
+	}
+
+	void NoFunction ()
+	{
+		_context.Hover.localScale = (new Vector3 (1, 1, 1));
+		SetFirstPoint = false;
+		isValid = false;
+
+	}
 
 	#region implemented abstract members of SKState
 	public override void update (float deltaTime)
 	{
+		if(EventSystem.current.IsPointerOverGameObject())
+		{
+			return;
+		}
+
 		Vector3 MouseDragPoint;
 		Vector3 ClickDownPoint;
+
 
 		if (Physics.Raycast (_context.ray, out _context.hit, 100.0f)) {
 			if (!SetFirstPoint) {
@@ -49,7 +87,7 @@ public class HospitalRoomPlacement :  SKState<HospitalStates>{
 				///store click point
 				ClickDownPoint = _context.getTilePoints (_context.hit.point);
 				firstClickPos = ClickDownPoint;
-
+					
 			}
 
 			if (Input.GetMouseButton (0)) {
@@ -126,26 +164,7 @@ public class HospitalRoomPlacement :  SKState<HospitalStates>{
 
 			if (Input.GetMouseButtonUp (0)) {
 				if (SetFirstPoint && isValid) {
-				
-					///buid the walls
-					Room room = new Room (_context.roomSelectedFromUI, BottomLeft, TopLeft, BottomRight, TopRight, xD, zD, _context.HorizontalWall, _context.VerticalWall, _context.RoomFloor);
-					_context.Rooms.Add (room);
-
-					Maps.setRoomMapBlock (BottomLeft, xD, zD, room.RoomID);
-					Maps.setFloorMapBlock (BottomLeft, xD, zD, 2);
-
-					_context.Hover.localScale = (new Vector3 (1, 1, 1));
-					SetFirstPoint = false;
-					isValid = false;
-
-					_machine.changeState<HospitalIdle>();
-
-				} else {
-					//reset
-
-					_context.Hover.localScale = (new Vector3 (1, 1, 1));
-					SetFirstPoint = false;
-					isValid = false;
+					_context.confirmedManager.Choice(OKFunction, NoFunction);
 				}
 			}
 		}

@@ -2,6 +2,8 @@
 using System.Collections;
 using Prime31.StateKit;
 using System.Collections.Generic;
+using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class HospitalStates : MonoBehaviour {
 
@@ -21,6 +23,13 @@ public class HospitalStates : MonoBehaviour {
 	public GameObject RoomFloor;
 
 	public GameObject ChosenItem;
+	
+	public ConfirmManager confirmedManager;
+
+	////room furnish stuff
+	public Room SelectedFurnishRoom;
+	public int SelectedFurnishRoomID;
+
 
 	/// <summary>
 	/// from the buttons
@@ -39,6 +48,7 @@ public class HospitalStates : MonoBehaviour {
 		_machine.addState (new HospitalRoomPlacement());
 		_machine.addState (new HospitalRemoveRoom ());
 		_machine.addState (new HostpitalFurnishSelectPos ());
+		_machine.addState (new HospitalSelectRoomFurnish ());
 
 		Hover.SetAsLastSibling ();
 		roomSelectedFromUI = RoomType.None;
