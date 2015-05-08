@@ -45,7 +45,7 @@ public class HostpitalFurnishSelectPos : SKState<HospitalStates> {
 				item.Rotate();
 			}
 
-			if(item.IsValidPosition(_context.Hover.position, roomID, _context.GetRoomFromID(roomID)))
+			if(item.IsValidPosition(_context.Hover.position, roomID, _context.GetRoomFromID(roomID)) && _context.SelectedFurnishRoomID == roomID)
 			{
 				_context.HoverRender.material.color = Color.green;
 

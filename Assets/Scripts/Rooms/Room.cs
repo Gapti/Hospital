@@ -35,8 +35,8 @@ public class Room {
 	public List<GameObject> rightWalls = new List<GameObject>();
 	public List<GameObject> topWalls = new List<GameObject>();
 	public List<GameObject> bottomWalls = new List<GameObject>();
-
 	public List<GameObject> Doors = new List<GameObject> ();
+
 	public GameObject roomFloor;
 
 	public const int MinXDist = 2;
@@ -57,10 +57,6 @@ public class Room {
 
 	}
 
-	public void MakeBluePrint(RoomType roomType, Vector3 leftDown, Vector3 leftUp, Vector3 rightDown, Vector3 rightUp, float xDist, float zDist)
-	{
-
-	}
 
 	//overloaded constructor room
 	public void BuildRoom(RoomType roomType, Vector3 leftDown, Vector3 leftUp, Vector3 rightDown, Vector3 rightUp, float xDist, float zDist, GameObject horizonalWall, GameObject verticalWall, GameObject floor)
@@ -213,8 +209,6 @@ public class Room {
 	{
 		Vector3 otherDoorPos;
 		Vector3 firstDoorPos;
-
-		Debug.Log (xD + "  " + zD);
 
 		switch(direction)
 		{
